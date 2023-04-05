@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //Controla a velodicadade da bola
     public float Speed;
+
+    //Controla a força do pulo
     public float JumpForce;
 
     //Controla a fisíca do objeto
     private Rigidbody2D rig;
 
+    //Verifica se esta pulando
     private bool isJumping;
 
     void Start()
@@ -31,16 +35,23 @@ public class Player : MonoBehaviour
             
             //liberado para pular
             isJumping = true;
+            //Debug.Log("isJumping = "+isJumping);
         }
 
-        //Checar se o player esta colidindo com o chão
-        void OnCollisionEnter2D(Collision2D colisor){
-            //Se o personagem bater em algum objeto com a layer 8
-            if(colisor.gameObject.layer == 8){
-                //Muda a variável para falso, 
-                //pois quando bate no chão não esta pulando
-                isJumping = false;
-            }
+    }
+    
+    //Checar se o player esta colidindo com o chão
+    void OnCollisionEnter2D(Collision2D collision){
+        //Se o personagem bater em algum objeto com a layer 8
+        if(collision.gameObject.layer == 8){
+            //Muda a variável para falso, 
+            //pois quando bate no chão não esta pulando
+            isJumping = false;
+            //Exibe no console qual camada a Plataforma está
+            //Debug.Log("Objeto da Camada: "+collision.gameObject.layer);
+            
+            //Qual nome do objeto da colisão
+            //Debug.Log("O objeto colidiu com " + collision.gameObject.name);
         }
     }
 }
